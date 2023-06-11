@@ -1,0 +1,17 @@
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.csproj.AssemblyReference.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.AssemblyInfoInputs.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.AssemblyInfo.cs
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.csproj.CoreCompileInputs.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\refint\WendingMachine.Application.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Application.deps.json
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Application.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Application.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Data.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Infrastructure.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Data.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Application\bin\Debug\net6.0\WendingMachine.Infrastructure.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\WendingMachine.Application.csproj.CopyComplete
+E:\Projects\WendingMachine\backend\WendingMachine.Application\obj\Debug\net6.0\ref\WendingMachine.Application.dll

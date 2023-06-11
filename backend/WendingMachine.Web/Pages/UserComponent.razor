@@ -1,0 +1,89 @@
+﻿@page "/"
+@inject HttpClient Http
+@inject IJSRuntime JS
+<PageTitle>Пользовательская страница</PageTitle>
+<h3>Вендинговая машина</h3>
+@if (machines is null || coins is null || drinks is null || machine is null)
+{
+    <p>Ждем...</p>
+}
+else
+{
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Выбрать вендинговый аппарат
+        </button>
+        <ul class="dropdown-menu">
+            @foreach(var item in machines)
+            {
+                <li><button class="dropdown-item" @onclick="()=>ChangeMachine(item.Id)">Вендинговый аппарат @item.Id</button></li>
+            }
+        </ul>
+    </div>
+
+    <div class="d-block">
+        @foreach (var coin in coins)
+        {
+            <button class="btn btn-info" @onclick="async()=>DepositToBalance(coin.Denomination)">@coin.Denomination</button>
+        }
+    </div>
+    foreach (var drink in drinks)
+    {
+        <div class="card d-inline-block" style="width: 18rem;">
+            <img class="card-img-top" src="@drink.ImagePath" alt="@drink.Name" />
+            <div class="card-body">
+                <h5 class="card-title">@drink.Name</h5>
+                <p class="card-text">Цена: @drink.Price | Количество:@drink.Count</p>
+                <button class="btn btn-primary" @onclick="()=>BuyDrink(drink.Id)">Купить</button>
+            </div>
+        </div>
+    }
+    <p>Баланс: @machine.balance</p>
+    <button class="btn btn-success" @onclick="async()=>GetChange()">Получить сдачу</button>
+}
+
+@code {
+    public Coin[] coins;
+    public Drink[] drinks;
+    public Machine[] machines;
+    public Machine machine;
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateMachineList();
+        machine = machines.First();
+        coins = await Http.GetFromJsonAsync<Coin[]>("/api/v1/Coin/coins");
+        drinks = await Http.GetFromJsonAsync<Drink[]>($"/api/v1/Drink/drinks/machine/{machine.Id}");
+    }
+    public async Task ChangeMachine(int id)
+    {
+        await UpdateMachineList();
+        machine = machines.FirstOrDefault(m => m.Id == id);
+        if (machine is null) throw new ArgumentNullException();
+        drinks = await Http.GetFromJsonAsync<Drink[]>($"/api/v1/Drink/drinks/machine/{machine.Id}");
+        this.StateHasChanged();
+    }
+    public async Task UpdateMachineList()
+    {
+        machines = await Http.GetFromJsonAsync<Machine[]>("/api/v1/Machine/machines");
+    }
+    public async Task DepositToBalance(int sum){
+        JsonContent json = JsonContent.Create(new { machineId = machine.Id, coin = sum });
+        var response = await Http.PatchAsync("api/v1/Machine/machines/deposit", json);
+        await ChangeMachine(machine.Id);
+    }
+    public async void BuyDrink(int drinkId)
+    {
+        JsonContent content = JsonContent.Create(new { idMachine = this.machine.Id, idDrink = drinkId});
+        await Http.PostAsync("/api/v1/Machine/machines/order", content);
+        await ChangeMachine(machine.Id);
+    }
+    public async Task GetChange()
+    {
+        string message = await Http.GetStringAsync($"/api/v1/Machine/machines/change/{machine.Id}");
+        //message = change;
+        await JS.InvokeVoidAsync("showChange", message);
+        //string change = await Http.GetStringAsync($"machines/change/{machine.Id}");
+        //await js.InvokeVoidAsync("showMessage", change);
+        await ChangeMachine(machine.Id);
+    }
+}

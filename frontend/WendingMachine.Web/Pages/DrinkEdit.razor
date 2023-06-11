@@ -1,0 +1,86 @@
+﻿@page "/admin/drink/{id:int?}"
+@inject HttpClient Http
+@inject NavigationManager manager
+@inject IJSRuntime JS
+@if (string.IsNullOrEmpty(SecretKode))
+{
+    <h3>Тебе сюда нельзя</h3>
+}
+else if(drink is null || machines is null)
+{
+    <label>Loading...</label>
+}
+else
+{
+    @if (Id.HasValue)
+    {
+        <h3>Изменение напитка</h3>
+
+    }
+    else
+    {
+        <h3>Создание напитка</h3>
+    }
+    <div>
+        <EditForm Model="@drink" OnSubmit="Save">
+        <label>Название: </label>
+
+            <InputText @bind-Value="drink.Name" />
+        <label>Цена: </label>
+        <InputNumber @bind-Value="drink.Price"/>
+        <label>Колиество: </label>
+        <InputNumber @bind-Value="drink.Count"/>
+        <label>Доступность: </label>
+        <InputCheckbox @bind-Value="drink.isAvailable"/>
+        <label>Ссылка на картинку: </label>
+        <InputText @bind-Value="drink.ImagePath"/>
+        @if(!Id.HasValue)
+        {
+            <label>Номер машины: </label>
+            <InputSelect @bind-Value="drink.MachineId">
+                @foreach (var machine in machines)
+                {
+                    <option value="@machine.Id">Вендинговая машина @machine.Id</option>
+                }
+            </InputSelect>
+        }
+        <button class="btn btn-primary" type="submit">Сохранить</button>
+        </EditForm>
+    </div>
+}
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string SecretKode { get; set; }
+
+    [Parameter]
+    public int? Id { get; set; }
+    public Drink drink{ get; set; }
+    public Machine[] machines{ get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id.HasValue)
+            drink = await Http.GetFromJsonAsync<Drink>($"/api/v1/Drink/drinks/{Id}");
+        else
+            drink = new Drink();
+        machines = await Http.GetFromJsonAsync<Machine[]>("/api/v1/Machine/machines");
+    }
+    public async Task Save()
+    {
+        JsonContent content = JsonContent.Create(new { name = drink.Name, price = drink.Price, count = drink.Count, isAvailable = drink.isAvailable, ImagePath=drink.ImagePath });
+        HttpResponseMessage message;
+        if (Id.HasValue)
+            message = await Http.PutAsync($"/api/v1/Drink/drink/{Id}?Key={SecretKode}", content);
+        else
+            message = await Http.PostAsync($"/api/v1/Drink/drink/{drink.MachineId}?Key={SecretKode}", content);
+        if (!message.IsSuccessStatusCode) await ShowMessage(Id is null ? "Не удалось создать напиток" : "Не удалось обновить напиток");
+        else
+        {
+            manager.NavigateTo($"/admin?SecretKode={SecretKode}");
+        }
+    }
+    public async Task ShowMessage(string message)
+    {
+        await JS.InvokeVoidAsync("showChange", message);
+    }
+}

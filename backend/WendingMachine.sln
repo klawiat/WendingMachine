@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33530.505
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WendingMachine.Api", "WendingMachine.Api\WendingMachine.Api.csproj", "{3DE094E8-EF1F-4A0E-87F9-67A61CB36CAC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D} = {6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706} = {A6F676F0-A269-4DB9-B5F4-82394BDBC706}
+		{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984} = {EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WendingMachine.Data", "WendingMachine.Data\WendingMachine.Data.csproj", "{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WendingMachine.Infrastructure", "WendingMachine.Infrastructure\WendingMachine.Infrastructure.csproj", "{A6F676F0-A269-4DB9-B5F4-82394BDBC706}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D} = {6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WendingMachine.Application", "WendingMachine.Application\WendingMachine.Application.csproj", "{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D} = {6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706} = {A6F676F0-A269-4DB9-B5F4-82394BDBC706}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DE094E8-EF1F-4A0E-87F9-67A61CB36CAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE094E8-EF1F-4A0E-87F9-67A61CB36CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE094E8-EF1F-4A0E-87F9-67A61CB36CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE094E8-EF1F-4A0E-87F9-67A61CB36CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C00B793-DD1F-4AD8-866B-A5EAE2C9D23D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F676F0-A269-4DB9-B5F4-82394BDBC706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBEFD981-996B-4E6B-ADCF-4C7B8CB55984}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E9F7554F-087C-4E9B-A16F-FAF75A79D330}
+	EndGlobalSection
+EndGlobal

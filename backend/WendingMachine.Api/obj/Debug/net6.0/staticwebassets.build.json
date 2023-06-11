@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "XW9cFSpCSUhEdLp7zK/QiJ47J5hPksDD5ikF9WJrAuI=",
+  "Source": "WendingMachine.Api",
+  "BasePath": "_content/WendingMachine.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
