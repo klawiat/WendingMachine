@@ -1,0 +1,38 @@
+﻿@page "/admin/coin"
+@inject HttpClient Http
+@inject IJSRuntime JS
+@inject NavigationManager manager
+<h3>Добавление монеты</h3>
+@if (string.IsNullOrEmpty(SecretKode))
+{
+    <h3>Тебе сюда нельзя</h3>
+}
+else
+{
+    <EditForm Model="coin" OnSubmit="Save">
+        <label>Номинал</label>
+        <InputNumber @bind-Value="coin.Denomination"/><br/>
+        @*<label>Доступность</label>*@
+        <InputCheckbox @bind-Value="coin.isAvailable" />
+        <label>Доступность</label><br />
+        <button type="submit">Сохранить</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string SecretKode { get; set; }
+    public Coin coin = new Coin();
+    public async Task Save()
+    {
+        JsonContent content = JsonContent.Create(new { denomination = coin.Denomination, isAvailable = coin.isAvailable });
+        var responce = await Http.PostAsync($"/api/v1/Coin/coins?Key={SecretKode}", content);
+        if (!responce.IsSuccessStatusCode) await ShowMessage("Не удалось создать монету");
+        else manager.NavigateTo($"/admin?SecretKode={SecretKode}");
+    }
+    public async Task ShowMessage(string message)
+    {
+        await JS.InvokeVoidAsync("showChange", message);
+    }
+}

@@ -1,0 +1,15 @@
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\bin\Debug\net6.0\WendingMachine.Infrastructure.deps.json
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\bin\Debug\net6.0\WendingMachine.Infrastructure.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\bin\Debug\net6.0\WendingMachine.Infrastructure.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\bin\Debug\net6.0\WendingMachine.Data.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\bin\Debug\net6.0\WendingMachine.Data.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.csproj.AssemblyReference.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.AssemblyInfoInputs.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.AssemblyInfo.cs
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.csproj.CoreCompileInputs.cache
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.csproj.CopyComplete
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\refint\WendingMachine.Infrastructure.dll
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\WendingMachine.Infrastructure.pdb
+E:\Projects\WendingMachine\backend\WendingMachine.Infrastructure\obj\Debug\net6.0\ref\WendingMachine.Infrastructure.dll

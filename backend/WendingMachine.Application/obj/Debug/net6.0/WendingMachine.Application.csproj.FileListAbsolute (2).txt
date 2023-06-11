@@ -1,0 +1,17 @@
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Application.deps.json
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Application.dll
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Application.pdb
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Data.dll
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Infrastructure.dll
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Data.pdb
+E:\Projects\VendingMachine\VendingMachine.Application\bin\Debug\net6.0\VendingMachine.Infrastructure.pdb
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.csproj.AssemblyReference.cache
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.GeneratedMSBuildEditorConfig.editorconfig
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.AssemblyInfoInputs.cache
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.AssemblyInfo.cs
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.csproj.CoreCompileInputs.cache
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.csproj.CopyComplete
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.dll
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\refint\VendingMachine.Application.dll
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\VendingMachine.Application.pdb
+E:\Projects\VendingMachine\VendingMachine.Application\obj\Debug\net6.0\ref\VendingMachine.Application.dll

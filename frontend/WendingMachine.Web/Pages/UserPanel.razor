@@ -1,0 +1,157 @@
+﻿@page "/"
+@inject HttpClient Http
+@inject IJSRuntime JS;
+<PageTitle>Панель пользователя</PageTitle>
+<h3>UserPanel</h3>
+
+@if (coins is null || machines is null || drinks is null)
+{
+    <label>Loading...</label>
+}
+else
+{
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Выбрать вендинговый аппарат
+        </button>
+        <ul class="dropdown-menu">
+            @foreach (var item in machines)
+            {
+                <li><button class="dropdown-item" @onclick="()=>GetMachineById(item.Id)">Вендинговый аппарат @item.Id</button></li>
+            }
+        </ul>
+    </div>
+
+    <div class="d-block">
+        @foreach (var coin in coins)
+        {
+            if (coin.isAvailable)
+            {
+                <button class="btn btn-info" @onclick="async()=> await DepositToBalance(coin.Denomination)">@coin.Denomination</button>
+            }
+            else
+            {
+                <button class="btn btn-info" disabled>@coin.Denomination</button>
+            }
+        }
+    </div>
+    foreach (var drink in drinks)
+    {
+        <div class="card d-inline-block" style="width: 18rem;" >
+            <img class="card-img-top" src="@drink.ImagePath" alt="@drink.Name" />
+            <div class="card-body">
+                <h5 class="card-title">@drink.Name</h5>
+                <p class="card-text">Цена: @drink.Price | Количество:@drink.Count</p>
+                @if(drink.Count>0 && currentMachine.Balance > drink.Price)
+                {
+                    <button class="btn btn-primary" @onclick="()=>BuyDrink(drink.Id)">Купить</button>
+                }
+                else
+                {
+                    <button class="btn btn-primary" disabled>Купить</button>
+                }
+            </div>
+        </div>
+    }
+    <p>Баланс: @currentMachine.Balance</p>
+    <button class="btn btn-success" @onclick="async()=>await GetChangeFromCurrentMachine()">Получить сдачу</button>
+}
+
+@code {
+    public Coin[] coins;
+    public Machine[] machines;
+    public Machine currentMachine;
+    public Drink[] drinks;
+    protected override async Task OnInitializedAsync()
+    {
+        coins = await Http.GetFromJsonAsync<Coin[]>("/api/v1/Coin/coins");
+        await LoadMachines();
+        GetMachineById();
+        await LoadDrinksByCurrentMachine();
+        drinks = await Http.GetFromJsonAsync<Drink[]>($"/api/v1/Drink/drinks/machine/{currentMachine.Id}");
+    }
+    public async Task ReloadAllData()
+    {
+        try
+        {
+            coins = await Http.GetFromJsonAsync<Coin[]>("/api/v1/Coin/coins");
+            await LoadMachines();
+            await GetMachineById(currentMachine.Id);
+            this.ShouldRender();
+        }
+        catch(Exception ex)
+        {
+            await ShowMessage("Не удалось загрузить данные");
+        }
+    }
+    public async Task LoadMachines()
+    {
+        try
+        {
+            machines = await Http.GetFromJsonAsync<Machine[]>("/api/v1/Machine/machines");
+            if (machines is null || !machines.Any()) throw new ArgumentNullException("Машины", "сервер недоступен или отдал пустой ответ");
+        }
+        catch(Exception ex)
+        {
+            ShowMessage($"Произошла ошибка:{ex.Message}");
+        }
+    }
+    public async Task GetMachineById(int id = 0)
+    {
+        try
+        {
+            currentMachine = machines.FirstOrDefault(m => m.Id == id, machines.First());
+            if (currentMachine is null) throw new ArgumentNullException("Машина","не найдена!");
+            await LoadDrinksByCurrentMachine();
+            this.ShouldRender();
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Произошла ошибка:{ex.Message}");
+        }
+    }
+    private async Task LoadDrinksByCurrentMachine()
+    {
+        try
+        {
+            drinks = await Http.GetFromJsonAsync<Drink[]>($"/api/v1/Drink/drinks/machine/{currentMachine.Id}");
+            if (drinks is null || !drinks.Any()) throw new ArgumentNullException("Напитки", "сервер недоступен или отдал пустой ответ");
+        }
+        catch (Exception ex)
+        {
+            ShowMessage($"Произошла ошибка:{ex.Message}");
+        }
+    }
+    public async Task BuyDrink(int drinkId)
+    {
+        JsonContent content = JsonContent.Create(new { idMachine = this.currentMachine.Id, idDrink = drinkId });
+        var responce = await Http.PostAsync("/api/v1/Machine/machines/order", content);
+        if (!responce.IsSuccessStatusCode)
+            await ShowMessage("Не удалось купить напиток");
+        await ReloadAllData();
+    }
+    public async Task GetChangeFromCurrentMachine()
+    {
+        if (currentMachine is null) await ShowMessage("Машина не выбрана");
+        else
+        {
+            string message = await Http.GetStringAsync($"/api/v1/Machine/machines/change/{currentMachine.Id}");
+            await ShowMessage(message);
+            await ReloadAllData();
+        }
+    }
+    public async Task DepositToBalance(int coin)
+    {
+        if (currentMachine is null) ShowMessage("Машина не выбрана");
+        else
+        {
+            JsonContent json = JsonContent.Create(new { machineId = currentMachine.Id, coin = coin});
+            var response = await Http.PatchAsync("api/v1/Machine/machines/deposit", json);
+            await ReloadAllData();
+        }
+    }
+    public async Task ShowMessage(string message)
+    {
+        await JS.InvokeVoidAsync("showChange", message);
+    } 
+}
