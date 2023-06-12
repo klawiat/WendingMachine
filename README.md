@@ -17,9 +17,13 @@
 Первым должен быть запущен проект из папки backend 
 По пути "backend\WendingMachine.Api\appsettings.json" исправить строку на вашу
 ``` sh
-  "ConnectionStrings": {
+"ConnectionStrings": {
     "DefaultConnection": "Data Source=(local);Initial Catalog=WendingDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False"
   }
+```
+Если вам необходимо поменять код для дотупа к административным возможностям, то он тоже лежит в файле appsettings.json 
+``` sh
+"SecretKey": "SecretKey",
 ```
 Также настроить порты на более подходящие для вас.
 Автоматическая документация swagger доступна по ссылке "https:localhost:(ваш порт)/swagger"

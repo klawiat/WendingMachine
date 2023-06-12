@@ -17,20 +17,20 @@ namespace WendingMachine.Api.Controllers
         [HttpGet("drinks")]
         public async Task<IActionResult> GetAll()
         {
-            var drinks = await service.GetDrinks();
+            IEnumerable<Data.Entities.Drink> drinks = await service.GetDrinks();
             return Ok(drinks);
         }
         [HttpGet("drinks/{id:int}")]
         public async Task<IActionResult> GetDrink([FromRoute] int id)
         {
-            var drink = await service.GetDrinkById(id);
+            Data.Entities.Drink drink = await service.GetDrinkById(id);
             return Ok(drink);
         }
 
         [HttpGet("drinks/machine/{machineId:int}")]
         public async Task<IActionResult> GetDrinksOfMachine([FromRoute] int machineId)
         {
-            var drinks = await service.GetDrinksByMachine(machineId);
+            IEnumerable<Data.Entities.Drink> drinks = await service.GetDrinksByMachine(machineId);
             return Ok(drinks);
         }
 

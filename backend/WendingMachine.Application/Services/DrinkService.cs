@@ -42,13 +42,13 @@ namespace WendingMachine.Application.Services
 
         public async Task<IEnumerable<Drink>> GetDrinks()
         {
-            var drinks = await repository.GetAll();
+            IEnumerable<Drink> drinks = await repository.GetAll();
             return drinks;
         }
 
         public async Task<IEnumerable<Drink>> GetDrinksByMachine(int machineId)
         {
-            var drinks = await repository.GetFiltered(d => d.MachineId == machineId);
+            IEnumerable<Drink> drinks = await repository.GetFiltered(d => d.MachineId == machineId);
             return drinks;
         }
 
