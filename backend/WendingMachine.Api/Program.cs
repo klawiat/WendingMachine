@@ -1,6 +1,6 @@
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using WendingMachine.Infrastructure;
+using WendingMachine.Api.Middlewares;
 
 namespace WendingMachine.Api
 {
@@ -16,9 +16,15 @@ namespace WendingMachine.Api
             WebApplication app = builder.Build();
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint(@"v1/swagger.json", "Wending"));
+                app.UseDeveloperExceptionPage();
+                
             }
+            else
+            {
+                app.UseCustomExceptionHandler();
+            }
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint(@"v1/swagger.json", "Wending"));
             app.UseCors(build => build.AllowAnyOrigin()
                                         .AllowAnyHeader()
                                         .AllowAnyMethod());

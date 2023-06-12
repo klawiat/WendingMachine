@@ -57,23 +57,23 @@ namespace WendingMachine.Application.Services
 
         public async Task<IEnumerable<Machine>> GetAll()
         {
-            var machines = await machineRepository.GetAll();
+            IEnumerable<Machine> machines = await machineRepository.GetAll();
             return machines;
         }
 
         public async Task<Machine> GetById(int id)
         {
-            var machine = await machineRepository.GetById(id);
+            Machine machine = await machineRepository.GetById(id);
             return machine;
         }
 
         public async Task<Dictionary<int, int>> GetChange(int id)
         {
-            var machine = await machineRepository.GetById(id);
+            Machine? machine = await machineRepository.GetById(id);
             if (machine is null)
                 throw new ArgumentNullException();
-            var balance = machine.Balance;
-            var coins = (await coinService.GetAvailableCoins()).Select(x => x.Denomination).OrderByDescending(x => x);
+            int balance = machine.Balance;
+            IOrderedEnumerable<int> coins = (await coinService.GetAvailableCoins()).Select(x => x.Denomination).OrderByDescending(x => x);
             int temp = 0;
             Dictionary<int, int> change = new Dictionary<int, int>();
             foreach (int coin in coins)

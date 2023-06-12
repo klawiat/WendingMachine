@@ -16,21 +16,21 @@ namespace WendingMachine.Api.Controllers
         [HttpGet("machines")]
         public async Task<IActionResult> GetAll()
         {
-            var machines = await service.GetAll();
+            IEnumerable<Data.Entities.Machine> machines = await service.GetAll();
             IEnumerable<MachineVM> vms = mapper.Map<IEnumerable<MachineVM>>(machines);
             return Ok(vms);
         }
         [HttpGet("machines/{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
-            var machine = await service.GetById(id);
+            Data.Entities.Machine machine = await service.GetById(id);
             MachineVM vm = mapper.Map<MachineVM>(machine);
             return Ok(machine);
         }
         [HttpPatch("machines/deposit/")]
         public async Task<IActionResult> DepositToBalance([FromBody] AddToBalanceDTO dto)
         {
-            var machine = await service.AddToBalanceById(dto);
+            Data.Entities.Machine machine = await service.AddToBalanceById(dto);
             MachineVM vm = mapper.Map<MachineVM>(machine);
             return Ok(vm);
         }

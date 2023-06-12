@@ -38,13 +38,13 @@ namespace WendingMachine.Application.Services
 
         public async Task<bool> Exist(int denomination)
         {
-            var coins = await repository.GetFiltered(x => x.Denomination == denomination, tracking: false);
+            IEnumerable<Coin> coins = await repository.GetFiltered(x => x.Denomination == denomination, tracking: false);
             return coins.Any();
         }
 
         public async Task<IEnumerable<Coin>> GetAvailableCoins()
         {
-            var coins = await repository.GetFiltered(c => c.isAvailable, tracking: false);
+            IEnumerable<Coin> coins = await repository.GetFiltered(c => c.isAvailable, tracking: false);
             return coins;
         }
 

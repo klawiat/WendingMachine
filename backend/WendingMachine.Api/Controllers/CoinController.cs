@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using WendingMachine.Api.Filters;
-using WendingMachine.Api.Models.ViewModels;
 using WendingMachine.Application.Models.DTOs;
 using WendingMachine.Application.Services.Interfaces;
 
@@ -17,7 +16,7 @@ namespace WendingMachine.Api.Controllers
         [HttpGet("coins")]
         public async Task<ActionResult> GetCoins()
         {
-            var coins = await service.GetCoins();
+            IEnumerable<Data.Entities.Coin> coins = await service.GetCoins();
             return Ok(coins);
         }
         [TypeFilter(typeof(SecretCodeAttribute))]
@@ -29,7 +28,7 @@ namespace WendingMachine.Api.Controllers
         }
         [TypeFilter(typeof(SecretCodeAttribute))]
         [HttpGet("coins/{id:int}/toggle")]
-        public async Task<ActionResult> ChangeCoin([FromRoute]int id, [FromQuery] string Key)
+        public async Task<ActionResult> ChangeCoin([FromRoute] int id, [FromQuery] string Key)
         {
             await service.ChangeAvailable(id);
             return Ok();

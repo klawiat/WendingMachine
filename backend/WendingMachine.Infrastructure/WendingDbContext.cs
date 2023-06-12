@@ -11,8 +11,6 @@ namespace WendingMachine.Infrastructure
         public DbSet<Machine> Machines { get; set; }
         public WendingDbContext(DbContextOptions<WendingDbContext> options) : base(options)
         {
-            //Database.EnsureDeleted();
-            /*Task.Delay(10);*/
             Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -34,7 +34,7 @@ namespace WendingMachine.Infrastructure.Repositories
 
         public async Task<T> GetById(int id)
         {
-            return await _dbSet.AsNoTracking().FirstAsync(obj=>obj.Id == id);
+            return await _dbSet.AsNoTracking().FirstAsync(obj => obj.Id == id);
         }
 
         public async Task<IEnumerable<T>> GetFiltered(Expression<Func<T, bool>> filter = null, string includeProperty = null, bool tracking = true)
